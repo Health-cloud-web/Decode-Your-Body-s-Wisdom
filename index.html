@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decode Your Body's Wisdom</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .header img.logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 50%;
+            padding: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .signal-card {
+            background: #f8f9ff;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .signal-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .signal-card h3 {
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .signal-card p {
+            line-height: 1.7;
+            color: #555;
+        }
+        
+        .checkbox-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .checkbox-item.checked {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+        
+        .checkbox-item label {
+            cursor: pointer;
+            flex: 1;
+            line-height: 1.5;
+        }
+        
+        .score-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 30px 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .result-card {
+            display: none;
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .result-card.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .result-card.balanced {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        
+        .result-card.attention {
+            background: #fff3cd;
+            border-left-color: #ffc107;
+        }
+        
+        .result-card.urgent {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        
+        .result-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .result-card p {
+            line-height: 1.7;
+            color: #333;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .exercise-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .exercise-box h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .exercise-box ol {
+            margin-left: 20px;
+            line-height: 2;
+        }
+        
+        .exercise-box li {
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .cta-box {
+            background: #764ba2;
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        .cta-box h3 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+        }
+        
+        .cta-box p {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .contact-info {
+            margin-top: 20px;
+            font-size: 1.1em;
+        }
+        
+        .contact-info a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .contact-info a:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px 15px;
+            }
+            
+            .section h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div style="margin-bottom: 20px;">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 300'%3E%3Ccircle cx='150' cy='150' r='145' fill='white' stroke='%234a90a4' stroke-width='3'/%3E%3Ctext x='150' y='160' font-family='Arial' font-size='24' fill='%234a90a4' text-anchor='middle'%3EMolekulare%3C/text%3E%3Ctext x='150' y='190' font-family='Arial' font-size='20' fill='%2388b04b' text-anchor='middle'%3ENaturtherapie-Praxis%3C/text%3E%3C/svg%3E" alt="Molekulare Naturtherapie-Praxis" class="logo" onerror="this.style.display='none'">
+            </div>
+            <h1>🌿 Decode Your Body's Wisdom</h1>
+            <p>Are You Truly Listening? Discover what your symptoms are trying to tell you</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <h2>Your Body's Secret Language</h2>
+                <p style="margin-bottom: 25px; line-height: 1.8;">Your body is constantly communicating. Every symptom is a messenger carrying profound insights about your physical, emotional, and spiritual well-being.</p>
+                
+                <div class="signal-card">
+                    <h3>🌿 The Whisper of Fatigue</h3>
+                    <p>Persistent fatigue is more than a need for rest. Chronic fatigue can signal emotional overload, a loss of meaning, or a deep call to slow down and reassess your life's direction.</p>
+                </div>
+                
+                <div class="signal-card">
+                    <h3>🔥 The Intestinal Complaint</h3>
+                    <p>Your digestive system mirrors your inner state. Bloating and acidity can reflect "indigestible" life situations, chronic stress, or feelings of misalignment with your true identity.</p>
+                </div>
+                
+                <div class="signal-card">
+                    <h3>💧 The Unspoken Story</h3>
+                    <p>Recurrent urinary infections can be linked to unexpressed anger, violated boundaries, or unresolved frustrations simmering beneath the surface.</p>
+                </div>
+            </div>
+            
+            <div class="section">
+                <div class="exercise-box">
+                    <h3>🧘 Begin Your Self-Discovery Journey</h3>
+                    <p style="margin-bottom: 20px;">This gentle exercise can offer powerful insights:</p>
+                    <ol>
+                        <li>Find a quiet moment and gently close your eyes</li>
+                        <li>Bring your attention to any area of your body that feels uncomfortable or tense</li>
+                        <li>With sincere curiosity, ask that part: "What are you trying to tell me?"</li>
+                        <li>Don't judge or analyze. Simply observe any thoughts, images, or sensations</li>
+                        <li>Note them down if you wish</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>The "Body Compass" Check-Up</h2>
+                <p style="margin-bottom: 25px; line-height: 1.8;">Take a moment to tune in. Check the statements that resonate with your current experience. Trust your first intuition.</p>
+                
+                <div id="checkboxList"></div>
+                
+                <div class="score-display">
+                    You've checked <span id="score">0</span> out of 20 statements
+                </div>
+                
+                <div id="resultBalanced" class="result-card balanced">
+                    <h3>Nurture Your Balance!</h3>
+                    <p>Your system shows remarkable resilience. Although your balance may be delicate, it is largely manageable. This is a great opportunity to continue nourishing your well-being through mindful practices.</p>
+                </div>
+                
+                <div id="resultAttention" class="result-card attention">
+                    <h3>Time to Deepen the Dialogue!</h3>
+                    <p>Your body is sending clearer signals that it needs more of your attention. This is a crucial moment to listen more deeply to your inner wisdom and unmet needs. Exploring professional support could bring invaluable insights and tools.</p>
+                </div>
+                
+                <div id="resultUrgent" class="result-card urgent">
+                    <h3>🔴 Your System is Calling for Help!</h3>
+                    <p>Your body is likely overwhelmed and sending strong distress signals. It is essential to seek professional guidance to help you unravel the root causes of your symptoms and embark on the path to regaining clarity, vitality, and true well-being.</p>
+                </div>
+            </div>
+            
+            <div class="cta-box">
+                <h3>Ready to Rebalance?</h3>
+                <p>Understanding your body's messages is the first step towards deep healing and renewed balance. Dr. Joyce El Hokayem offers a 3-month integrated program designed to support your journey towards deep rebalancing.</p>
+                <div class="contact-info">
+                    <p>📧 Email: <a href="mailto:mnt-praxis@protonmail.com">mnt-praxis@protonmail.com</a></p>
+                    <p>🌐 Website: <a href="https://therapeut-naturheilpraxis.de/en/" target="_blank">therapeut-naturheilpraxis.de/en</a></p>
+                </div>
+                <p style="margin-top: 25px; font-style: italic; opacity: 0.9;">"The body never lies. You just need to learn to listen."</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const statements = [
+            "I wake up tired, and that feeling persists throughout the day, even after a good night's sleep.",
+            "My stomach is often upset, bloated, or I frequently experience digestive discomfort after meals.",
+            "It seems that every time stress increases, I inevitably catch a cold or feel exhausted.",
+            "I often feel emotionally drained, irritable, or my mood changes unpredictably.",
+            "Hormonal changes or menstrual cycles cause significant discomfort or disruption in my life.",
+            "I find it difficult to assert myself, to say 'no,' or I feel that my personal boundaries are often crossed.",
+            "There is a persistent feeling of disconnection, as if I am not truly present or 'not myself.'",
+            "I feel isolated, as if no one truly understands the depth of what I am going through.",
+            "A part of me is hesitant, even fearful, to listen to my body's deeper messages.",
+            "My life seems devoid of spontaneous joy, energy, or that vibrant spark I once knew.",
+            "I frequently find myself clenching my jaw, grinding my teeth, or carrying tension in my shoulders and neck.",
+            "I have difficulty falling asleep, staying asleep, or my sleep does not feel restorative.",
+            "My cravings for certain foods (sugar, caffeine, processed snacks) seem uncontrollable.",
+            "I often feel anxious, restless, or my mind races with worries.",
+            "I notice unexplained aches, stiffness, or discomfort in different parts of my body.",
+            "I tend to bottle up my emotions rather than expressing them openly and healthily.",
+            "I have lost interest in hobbies or activities I once enjoyed.",
+            "I feel a sense of overwhelm when faced with daily tasks or decisions.",
+            "My skin frequently breaks out, or I suffer from persistent skin irritations.",
+            "I often feel guilty or responsible for the feelings and actions of others."
+        ];
+        
+        const checkboxList = document.getElementById('checkboxList');
+        const scoreDisplay = document.getElementById('score');
+        const resultBalanced = document.getElementById('resultBalanced');
+        const resultAttention = document.getElementById('resultAttention');
+        const resultUrgent = document.getElementById('resultUrgent');
+        
+        // Create all checkbox items
+        statements.forEach((statement, index) => {
+            const div = document.createElement('div');
+            div.className = 'checkbox-item';
+            div.innerHTML = `
+                <input type="checkbox" id="check${index}" />
+                <label for="check${index}">${statement}</label>
+            `;
+            
+            const checkbox = div.querySelector('input');
+            const label = div.querySelector('label');
+            
+            // Toggle checkbox when clicking anywhere on the item
+            const toggleCheck = () => {
+                checkbox.checked = !checkbox.checked;
+                updateScore();
+            };
+            
+            // Auto-count when checkbox changes
+            checkbox.addEventListener('change', updateScore);
+            
+            label.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleCheck();
+            });
+            
+            div.addEventListener('click', (e) => {
+                if (e.target !== checkbox && e.target !== label) {
+                    toggleCheck();
+                }
+            });
+            
+            checkboxList.appendChild(div);
+        });
+        
+        // Automatic counting function
+        function updateScore() {
+            let totalChecked = 0;
+            
+            // Count all checked boxes
+            document.querySelectorAll('.checkbox-item').forEach((item) => {
+                const checkbox = item.querySelector('input');
+                if (checkbox.checked) {
+                    item.classList.add('checked');
+                    totalChecked++;
+                } else {
+                    item.classList.remove('checked');
+                }
+            });
+            
+            // Update score display automatically
+            scoreDisplay.textContent = totalChecked;
+            
+            // Hide all results first
+            resultBalanced.classList.remove('active');
+            resultAttention.classList.remove('active');
+            resultUrgent.classList.remove('active');
+            
+            // Show appropriate result based on count
+            if (totalChecked < 7) {
+                resultBalanced.classList.add('active');
+            } else if (totalChecked >= 7 && totalChecked <= 14) {
+                resultAttention.classList.add('active');
+            } else {
+                resultUrgent.classList.add('active');
+            }
+        }
+        
+        // Initialize with zero count
+        updateScore();
+    </script>
+</body>
+</html>
